@@ -1,0 +1,105 @@
+/* .hud{
+  font-size: 20px !important;
+  color: white;
+  display: inline-block;
+  padding: 4px;
+  color: hsl(173, 100%, 50%);
+  border: 2px solid; 
+  border-radius: 10px;
+  z-index: 1000;
+  position: absolute;
+  width: auto;
+  top: 0px;
+   
+}
+.statusBar{
+    height: 32px; 
+    text-align: left;
+}
+
+.hudStausBarName{
+  padding: 4px;
+  color:  hsl(173, 100%, 50%);
+  float: left;
+}
+
+.hudStausBarNumber{
+    padding: 4px;
+    color: white;
+    float: right;
+    
+}
+
+.hudIcon{
+    font-weight: 700;
+    font-size: 20px !important;
+    background-color: white;
+    border-radius: 4px;
+    padding : 3px;
+    color: white;
+    height: 32px;
+    width: 32px;
+    max-width: 32px !important;
+}
+
+.tdAlignRight{
+    text-align : center;
+}
+.tblHd{
+    font-size: 20px !important;
+    color: hsl(173, 100%, 50%);
+    text-align: center;
+}
+
+.tdText{
+    color:  hsl(173, 100%, 50%) !important;
+}
+
+.choicesContainer{
+    font-size: 20px !important;
+    display: inline-block;
+    padding: 4px;
+    color: hsl(173, 100%, 50%);
+    border: 2px solid; 
+    border-radius: 10px;
+    z-index: 900;
+    position: absolute;
+    width: auto;
+    top: 50%;
+    left: 50%;
+    min-height: 10%;
+    max-width: 100%;
+    transform: translate(-50%, -50%)
+
+}
+
+.messageContainer{
+    font-size: 18px !important;
+    color: grey;
+    padding: 14px;
+    margin-top: 10px;
+    font-weight: 700;
+    
+}
+
+.choiceCard{
+    color:white !important;
+    border: 2px solid; 
+    border-radius: 10px;
+    display: inline-block;
+    min-height: 80%;
+    cursor: pointer;
+}
+.choiceCard:active{
+    box-shadow: 0 0 5px -1px rgba(0,0,0,0.6);
+}
+.showJumpButton{
+  opacity: 1;
+}
+
+.hideJumpButton{
+  opacity: 0;
+}
+.hideJumpButton:hover{
+  cursor: unset;
+} */
