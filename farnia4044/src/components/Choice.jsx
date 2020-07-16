@@ -6,7 +6,7 @@ function Choice(props) {
   // console.log(props.choice)
 
   return (
-    <td tabIndex={props.value} className="">
+    <div tabIndex={props.value} className="">
       <button
         style={{ listStyleType: "none" }}
         className={`btn btn-outline-info`}
@@ -67,7 +67,7 @@ function Choice(props) {
           ""
         )}
       </button>
-    </td>
+    </div>
   );
 }
 

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import HUD from "./components/Hud";
-import JumpButton from "./components/JumpButton.jsx";
+// import JumpButton from "./components/JumpButton.jsx";
 import Game from "./gameLogic/F";
 import StarField from "./components/StarField.jsx";
 import Choices from "./components/Choices.jsx";
@@ -121,7 +121,8 @@ class App extends Component {
 
   jump(scn) {
     //   event.preventDefault()
-    document.stars.forEach((star, i) => {
+    const stars = document.querySelectorAll("div.backgroundStar");
+    stars.forEach((star, i) => {
       let delay = `${Math.random() * 900}ms`;
       star.style.animationDelay = delay;
       star.style.animationName = "hyper";
@@ -140,7 +141,8 @@ class App extends Component {
     let won = this.state.won;
     let scn = lost ? 0 : scene;
     setTimeout(() => {
-      document.stars.forEach((star, i) => {
+      const stars = document.querySelectorAll("div.backgroundStar");
+      stars.forEach((star, i) => {
         star.style.animationName = null;
       });
 
@@ -149,7 +151,8 @@ class App extends Component {
   }
 
   expedition(scene) {
-    document.stars.forEach((star, i) => {
+    const stars = document.querySelectorAll("div.backgroundStar");
+    stars.forEach((star, i) => {
       let delay = `${Math.random() * 900}ms`;
       star.style.animationDelay = delay;
       star.style.animationName = "hyper";

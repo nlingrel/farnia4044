@@ -7,15 +7,15 @@ function JumpButton(props) {
   if (props.scene === 2) text = "Forage";
   if (props.scene === 99) text = "Play Again";
 
-  let visible = !props.visible;
+  const visible = !props.visible;
+  const visClass = visible ? "showJumpButton" : "hideJumpButton";
   return (
     <>
       <div className="row">
         <button
           id="hyper"
           type="button"
-          // className={visible ? `showJumpButton` : `hideJumpButton`}
-          className="btn btn-outline-info "
+          className={`${visClass} btn btn-outline-info `}
           onClick={visible ? props.onClick : null}
         >
           {text}

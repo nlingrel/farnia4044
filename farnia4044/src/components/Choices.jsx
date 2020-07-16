@@ -44,7 +44,7 @@ function Choices(props) {
           <JumpButton
             visible={props.visible}
             scene={props.scene}
-            onClick={props.onClick}
+            onClick={props.clickJump}
           />
         </div>
       </div>
