@@ -165,7 +165,7 @@ class App extends Component {
     // let lost = this.state.lost;
     // let won = this.state.won;
     return (
-      <div className="App">
+      <div className="App container-fluid">
         <HUD
           fuel={this.state.fuel}
           food={this.state.food}
@@ -185,7 +185,14 @@ class App extends Component {
               : scn.prompt
           }
           onSelect={this.selectChoice}
-          jumping={this.state.jumping}
+          jumping={jumping}
+          clickJump={
+            jumping
+              ? ""
+              : this.game.lost || this.game.won
+              ? this.noGo
+              : this.handleClick
+          }
           scene={this.state.scene}
           symbols={this.state.resourceSymbols}
           colors={this.state.resourceColors}
@@ -194,22 +201,6 @@ class App extends Component {
 
         <div className="scene">
           <StarField jumping={this.state.jumping} />
-
-          {jumping ? (
-            ""
-          ) : this.game.lost || this.game.won ? (
-            <JumpButton
-              onClick={this.noGo}
-              scene={99}
-              visible={this.state.jumping}
-            />
-          ) : (
-            <JumpButton
-              onClick={this.handleClick}
-              scene={this.state.scene}
-              visible={this.state.jumping}
-            />
-          )}
         </div>
       </div>
     );

@@ -1,15 +1,17 @@
 import React from "react";
 import Choice from "./Choice";
 import Message from "./Message";
+import JumpButton from "./JumpButton";
 
 function Choices(props) {
   let scn = props.scene;
   let choices = [];
-  choices = props.choices.map((choice, key) => {
+  choices = props.choices.map((choice, i) => {
     return (
       <Choice
-        key={key}
-        value={key}
+        key={i}
+        index={i}
+        value={i}
         onSelect={props.onSelect}
         symbols={props.symbols}
         colors={props.colors}
@@ -23,28 +25,29 @@ function Choices(props) {
     <></>
   ) : (
     <>
-      <table className={`table bg-transparent`}>
-        <thead>
-          <tr>
-            <th colSpan={`${props.choices.length}`} className={`text-center`}>
-              {props.prompt}
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>{choices}</tr>
-        </tbody>
-        <tfoot>
-          <tr>
-            <th
-              colSpan={`${props.choices.length}`}
-              className={`card bg-transparent border-info`}
-            >
-              <Message message={props.message} />
-            </th>
-          </tr>
-        </tfoot>
-      </table>
+      <div
+        className="bg-transparent"
+        style={{ width: "vw", height: "300px" }}
+      ></div>
+      <div className="container-sm">
+        <div className={`card bg-transparent`}>
+          <div className={`card-header text-center text-secondary h4`}>
+            {props.prompt}
+          </div>
+
+          <div className="card-body text-center">
+            <div className="btn-group">{choices}</div>
+          </div>
+          <div className="card-footer bg-transparent text-secondary h6">
+            <Message message={props.message} />
+          </div>
+          <JumpButton
+            visible={props.visible}
+            scene={props.scene}
+            onClick={props.onClick}
+          />
+        </div>
+      </div>
     </>
   );
 }

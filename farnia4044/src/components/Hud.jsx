@@ -8,7 +8,7 @@ function HUD(props) {
       style={{ zIndex: "1000", position: "absolute" }}
     >
       <div className={`card bg-transparent btn-outline-info`}>
-        <div className="card-header">FitRep</div>
+        <div className="card-header text-center">FitRep</div>
         <div className="card-body p-1">
           <StatusBar
             resource={props.fuel}

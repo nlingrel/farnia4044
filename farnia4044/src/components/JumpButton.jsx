@@ -9,16 +9,18 @@ function JumpButton(props) {
 
   let visible = !props.visible;
   return (
-    <form>
-      <button
-        id="hyper"
-        type="button"
-        // className={visible ? `showJumpButton` : `hideJumpButton`}
-        className="showJumpButton"
-        onClick={visible ? props.onClick : null}
-      >
-        {text}
-      </button>
+    <>
+      <div className="row">
+        <button
+          id="hyper"
+          type="button"
+          // className={visible ? `showJumpButton` : `hideJumpButton`}
+          className="btn btn-outline-info "
+          onClick={visible ? props.onClick : null}
+        >
+          {text}
+        </button>
+      </div>
       <div className="range">
         <label htmlFor="range">{text}</label>
         <input
@@ -30,7 +32,7 @@ function JumpButton(props) {
           defaultValue="0"
         />
       </div>
-    </form>
+    </>
   );
 }
 
