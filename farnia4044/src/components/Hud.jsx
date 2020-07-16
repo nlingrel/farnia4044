@@ -4,11 +4,11 @@ import StatusBar from "./StatusBar";
 function HUD(props) {
   return (
     <div
-      className={` card bg-transparent border-info `}
+      className={` card bg-transparent border-info m-2`}
       style={{ zIndex: "1000", position: "absolute" }}
     >
       <div className={`card bg-transparent btn-outline-info`}>
-        <div className="card-header text-center">FitRep</div>
+        <div className="card-header text-center h5">FitRep</div>
         <div className="card-body p-1">
           <StatusBar
             resource={props.fuel}

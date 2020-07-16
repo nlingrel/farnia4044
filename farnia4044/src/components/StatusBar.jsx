@@ -7,9 +7,11 @@ function StatusBar(props) {
     <div className={`card border-0 bg-transparent`}>
       <div className="d-flex justify-content-between">
         <HudIcon symbol={props.symbol} color={props.color} />
-        <span className={` list-group-item bg-transparent`}>{props.name}</span>
+        <span className={` list-group-item bg-transparent font-weight-bold`}>
+          {props.name}
+        </span>
 
-        <span className={`list-group-item bg-transparent`}>
+        <span className={`list-group-item bg-transparent font-weight-bold`}>
           {props.resource}{" "}
         </span>
       </div>

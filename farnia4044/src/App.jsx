@@ -6,6 +6,7 @@ import Game from "./gameLogic/F";
 import Choices from "./components/Choices.jsx";
 import IdleStarField from "./components/IdleStarField.jsx";
 import JumpStarField from "./components/JumpStarfield";
+import TipBox from "./components/TipBox";
 
 class App extends Component {
   constructor(props) {
@@ -58,19 +59,36 @@ class App extends Component {
         farsecs: "grey",
       },
       updates: {},
+      mute: false,
+      tips: {
+        0: ["Choose a Starting Difficulty"],
+        1: [
+          " Positive distances will move you farther away from your final destination.",
+          "Each system has been scanned and will contain at least one expedition for the indicated resource",
+          "Every system jump costs one fuel",
+        ],
+        2: [
+          "Expeditions are how you gather resources within a solar sytem",
+          "Some expeditions grant bonus resources",
+          "Expeditions don't cost fuel",
+        ],
+        3: [""],
+      },
     };
     this.game = new Game();
     this.selectChoice = this.selectChoice.bind(this);
     this.jump = this.jump.bind(this);
     this.endJump = this.endJump.bind(this);
-    // this.handleClick = this.handleClick.bind(this);
+
     this.noGo = this.noGo.bind(this);
     this.chooseDifficulty = this.chooseDifficulty.bind(this);
+    this.soundtrack = new Audio("./magicforest.mp3");
   }
 
   componentDidMount() {
-    //   console.log(this.game)
+    this.soundtrack.play();
   }
+
   chooseDifficulty(event) {
     const choice = event.target.value;
     console.log("Difficulty chosen = ", choice);
@@ -81,9 +99,9 @@ class App extends Component {
   }
   selectChoice(event) {
     event.preventDefault();
-    // console.log('selcetion button value', event.target.value)
-    // document.getElementsByClassName("App", () => {});
-    const choice = event.target.value;
+
+    const choice = event.currentTarget.value;
+    console.log("Choice as chosen", choice);
     const scn = this.state.scene;
     switch (scn) {
       case 1:
@@ -129,39 +147,7 @@ class App extends Component {
     );
   }
 
-  // handleClick(event) {
-  //   let scn = this.state.scene;
-  //   // let updates;
-  //   let chosen = this.state.selection === null ? 0 : this.state.selection;
-  //   switch (scn) {
-  //     // case 0:
-  //     //   this.game.initialize(chosen);
-  //     //   this.game.newSystems();
-  //     //   this.jump(scn);
-  //     //   break;
-  //     case 1:
-  //       this.game.jump(chosen);
-  //       this.jump(scn);
-  //       break;
-  //     case 2:
-  //       this.game.expedition(chosen);
-  //       this.expedition(scn);
-  //       break;
-  //     default:
-  //       this.noGo();
-  //   }
-  // console.log(this.game)
-  // }
-
   jump(scn) {
-    //   event.preventDefault()
-    // const stars = document.querySelectorAll("div.backgroundStar");
-    // stars.forEach((star, i) => {
-    //   let delay = `${Math.random() * 900}ms`;
-    //   star.style.animationDelay = delay;
-    //   star.style.animationName = "hyper";
-    // });
-
     this.updateState(true, scn, false, false, () => {
       this.endJump(scn + 1);
     });
@@ -176,22 +162,12 @@ class App extends Component {
     let won = this.state.won;
     let scn = lost ? 0 : scene;
     setTimeout(() => {
-      // const stars = document.querySelectorAll("div.backgroundStar");
-      // stars.forEach((star, i) => {
-      //   star.style.animationName = null;
-      // });
-
       this.updateState(false, scn, lost, won);
     }, timeout);
   }
 
   expedition(scene) {
     const stars = document.querySelectorAll("div.backgroundStar");
-    // stars.forEach((star, i) => {
-    //   let delay = `${Math.random() * 900}ms`;
-    //   star.style.animationDelay = delay;
-    //   star.style.animationName = "hyper";
-    // });
 
     this.updateState(true, scene, false, false, () => {
       this.endJump(scene - 1);
@@ -201,12 +177,11 @@ class App extends Component {
   render() {
     const scn = this.state.scenes[this.state.scene];
     const jumping = this.state.jumping;
-    // let lost = this.state.lost;
-    // let won = this.state.won;
+    const tips = this.state.tips[this.state.scene];
+
     return (
       <div className="App container-fluid" style={{ background: "black" }}>
         {jumping ? <JumpStarField /> : <IdleStarField />}
-
         <HUD
           fuel={this.state.fuel}
           food={this.state.food}
@@ -228,18 +203,12 @@ class App extends Component {
           chooseDifficulty={this.chooseDifficulty}
           onSelect={this.selectChoice}
           jumping={jumping}
-          // clickJump={
-          //   jumping
-          //     ? ""
-          //     : this.game.lost || this.game.won
-          //     ? this.noGo
-          //     : this.handleClick
-          // }
           scene={this.state.scene}
           symbols={this.state.resourceSymbols}
           colors={this.state.resourceColors}
           message={this.state.message}
         />
+        {jumping ? "" : <TipBox tips={tips} />}
       </div>
     );
   }

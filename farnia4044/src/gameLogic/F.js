@@ -11,19 +11,33 @@ import Farnian from "./Farnian";
 
 const resources = ["food", "fuel", "fitness"];
 const deathCauses = {
-  food: ["starved to death", "died from malnutrition", "died of starvation"],
+  food: [
+    "starved to death",
+    "died from malnutrition",
+    "died of starvation",
+    "died because they didn't get enough vitamins",
+    "died from lack of food",
+    "died of hunger",
+  ],
   fitness: [
     "offed themselves",
     "jumped out the airlock",
     "died from drinking chemicals",
-    "died of exposure while streaking on an asteroid.",
+    "died of exposure while streaking on an asteroid",
+    "died of heart attack",
+    "died from extreme stress",
+    "was killed by an arch-nemesis",
+    "died horribly... don't ask",
+    "",
   ],
   accident: [
     "fell into the food harvester",
     "burned to death in a fuel accident",
     "died from life support failure.",
     "died from a helmet crack during EVA.",
-    "got impaled by ice shard while harvesting water and died.",
+    "died while harvesting resources.",
+    "died from internal bleeding",
+    "was crushed to death by a docking module",
   ],
 };
 
@@ -62,8 +76,6 @@ const generateSystemPreview = function (resource) {
 
 const generateEncounter = function (mainResource) {
   let noMain = mainResource === undefined;
-  // if(noMain === false) console.log('noMain was false ',mainResource)
-  // if(noMain) mainResource = getRandomResource()
   let appendCount = getRandom(3);
   let append = "";
   for (let i = 0; i < appendCount; i++) {
@@ -379,6 +391,7 @@ class Game {
       return;
     }
     this.distanceLeft += this.choices[chosen].distance;
+    console.log("Choices in game controller", this.choices);
     if (this.distanceLeft <= 0) {
       this.distanceLeft = 0;
       this.winGame();
