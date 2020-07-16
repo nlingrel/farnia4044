@@ -6,7 +6,7 @@ function Choice(props) {
   // console.log(props.choice)
 
   return (
-    <div tabIndex={props.value} className="">
+    <div tabIndex={props.value} className="btn-group">
       <button
         style={{ listStyleType: "none" }}
         className={`btn btn-outline-info`}
