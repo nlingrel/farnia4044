@@ -1,7 +1,6 @@
 import React from "react";
 import Choice from "./Choice";
 import Message from "./Message";
-import JumpButton from "./JumpButton";
 
 function Choices(props) {
   let scn = props.scene;
@@ -12,7 +11,7 @@ function Choices(props) {
         key={i}
         index={i}
         value={i}
-        onSelect={props.onSelect}
+        onSelect={scn === 0 ? props.chooseDifficulty : props.onSelect}
         symbols={props.symbols}
         colors={props.colors}
         choice={choice}
@@ -38,14 +37,9 @@ function Choices(props) {
           <div className="card-body text-center">
             <div className="btn-group">{choices}</div>
           </div>
-          <div className="card-footer bg-transparent text-secondary h6">
+          <div className="card-footer bg-transparent text-secondary text-center h6">
             <Message message={props.message} />
           </div>
-          <JumpButton
-            visible={props.visible}
-            scene={props.scene}
-            onClick={props.clickJump}
-          />
         </div>
       </div>
     </>

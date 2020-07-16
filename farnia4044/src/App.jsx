@@ -2,8 +2,10 @@ import React, { Component } from "react";
 import HUD from "./components/Hud";
 // import JumpButton from "./components/JumpButton.jsx";
 import Game from "./gameLogic/F";
-import StarField from "./components/StarField.jsx";
+
 import Choices from "./components/Choices.jsx";
+import IdleStarField from "./components/IdleStarField.jsx";
+import JumpStarField from "./components/JumpStarfield";
 
 class App extends Component {
   constructor(props) {
@@ -29,8 +31,16 @@ class App extends Component {
       scene: 0,
       scenes: {
         0: { prompt: " Farnia : 4044", name: "New Game?", scene: 0 },
-        1: { prompt: "Choose a Destination", name: "System", scene: 1 },
-        2: { prompt: "Choose an Expedition", name: "Expedition", scene: 2 },
+        1: {
+          prompt: "Choose a Destination Solar System",
+          name: "System",
+          scene: 1,
+        },
+        2: {
+          prompt: "Choose an Intra-System Expedition",
+          name: "Expedition",
+          scene: 2,
+        },
         3: { prompt: "Success", name: "Destination", scene: 3 },
       },
       resourceSymbols: {
@@ -53,23 +63,43 @@ class App extends Component {
     this.selectChoice = this.selectChoice.bind(this);
     this.jump = this.jump.bind(this);
     this.endJump = this.endJump.bind(this);
-    this.handleClick = this.handleClick.bind(this);
+    // this.handleClick = this.handleClick.bind(this);
     this.noGo = this.noGo.bind(this);
+    this.chooseDifficulty = this.chooseDifficulty.bind(this);
   }
 
   componentDidMount() {
     //   console.log(this.game)
   }
+  chooseDifficulty(event) {
+    const choice = event.target.value;
+    console.log("Difficulty chosen = ", choice);
 
+    this.game.initialize(choice);
+    this.game.newSystems();
+    this.jump(0);
+  }
   selectChoice(event) {
     event.preventDefault();
     // console.log('selcetion button value', event.target.value)
-    this.setState({
-      selection: parseInt(event.target.value),
-    });
+    // document.getElementsByClassName("App", () => {});
+    const choice = event.target.value;
+    const scn = this.state.scene;
+    switch (scn) {
+      case 1:
+        this.game.jump(choice);
+        this.jump(scn);
+        break;
+      case 2:
+        this.game.expedition(choice);
+        this.expedition(scn);
+        break;
+      default:
+        this.noGo();
+    }
   }
 
-  updateState(jump = false, scene, lost = false, won = false) {
+  updateState(jump = false, scene, lost = false, won = false, callback) {
     let choices =
       lost || won
         ? [
@@ -79,57 +109,62 @@ class App extends Component {
             { name: "Hopeless" },
           ]
         : this.game.choices;
-    this.setState({
-      crew: this.game.farniansCrew,
-      crewCount: this.game.farniansCount,
-      fuel: this.game.fuelCount,
-      food: this.game.foodCount,
-      fitness: this.game.fitnessCount,
-      distanceLeft: this.game.distanceLeft,
-      choices: choices,
-      message: this.game.message,
-      jumping: jump,
-      scene: scene,
-      lost: this.game.lost,
-      won: won,
-    });
+    const cb = callback ? callback : null;
+    this.setState(
+      {
+        crew: this.game.farniansCrew,
+        crewCount: this.game.farniansCount,
+        fuel: this.game.fuelCount,
+        food: this.game.foodCount,
+        fitness: this.game.fitnessCount,
+        distanceLeft: this.game.distanceLeft,
+        choices: choices,
+        message: this.game.message,
+        jumping: jump,
+        scene: scene,
+        lost: this.game.lost,
+        won: won,
+      },
+      cb
+    );
   }
 
-  handleClick(event) {
-    let scn = this.state.scene;
-    // let updates;
-    let chosen = this.state.selection === null ? 0 : this.state.selection;
-    switch (scn) {
-      case 0:
-        this.game.initialize(chosen);
-        this.game.newSystems();
-        this.jump(scn);
-        break;
-      case 1:
-        this.game.jump(chosen);
-        this.jump(scn);
-        break;
-      case 2:
-        this.game.expedition(chosen);
-        this.expedition(scn);
-        break;
-      default:
-        this.noGo();
-    }
-    // console.log(this.game)
-  }
+  // handleClick(event) {
+  //   let scn = this.state.scene;
+  //   // let updates;
+  //   let chosen = this.state.selection === null ? 0 : this.state.selection;
+  //   switch (scn) {
+  //     // case 0:
+  //     //   this.game.initialize(chosen);
+  //     //   this.game.newSystems();
+  //     //   this.jump(scn);
+  //     //   break;
+  //     case 1:
+  //       this.game.jump(chosen);
+  //       this.jump(scn);
+  //       break;
+  //     case 2:
+  //       this.game.expedition(chosen);
+  //       this.expedition(scn);
+  //       break;
+  //     default:
+  //       this.noGo();
+  //   }
+  // console.log(this.game)
+  // }
 
   jump(scn) {
     //   event.preventDefault()
-    const stars = document.querySelectorAll("div.backgroundStar");
-    stars.forEach((star, i) => {
-      let delay = `${Math.random() * 900}ms`;
-      star.style.animationDelay = delay;
-      star.style.animationName = "hyper";
-    });
+    // const stars = document.querySelectorAll("div.backgroundStar");
+    // stars.forEach((star, i) => {
+    //   let delay = `${Math.random() * 900}ms`;
+    //   star.style.animationDelay = delay;
+    //   star.style.animationName = "hyper";
+    // });
 
-    this.updateState(true, scn);
-    this.endJump(scn + 1);
+    this.updateState(true, scn, false, false, () => {
+      this.endJump(scn + 1);
+    });
   }
 
   noGo() {
@@ -141,10 +176,10 @@ class App extends Component {
     let won = this.state.won;
     let scn = lost ? 0 : scene;
     setTimeout(() => {
-      const stars = document.querySelectorAll("div.backgroundStar");
-      stars.forEach((star, i) => {
-        star.style.animationName = null;
-      });
+      // const stars = document.querySelectorAll("div.backgroundStar");
+      // stars.forEach((star, i) => {
+      //   star.style.animationName = null;
+      // });
 
       this.updateState(false, scn, lost, won);
     }, timeout);
@@ -152,24 +187,26 @@ class App extends Component {
 
   expedition(scene) {
     const stars = document.querySelectorAll("div.backgroundStar");
-    stars.forEach((star, i) => {
-      let delay = `${Math.random() * 900}ms`;
-      star.style.animationDelay = delay;
-      star.style.animationName = "hyper";
-    });
+    // stars.forEach((star, i) => {
+    //   let delay = `${Math.random() * 900}ms`;
+    //   star.style.animationDelay = delay;
+    //   star.style.animationName = "hyper";
+    // });
 
-    this.updateState(true, scene);
-    this.endJump(scene - 1);
+    this.updateState(true, scene, false, false, () => {
+      this.endJump(scene - 1);
+    });
   }
 
   render() {
-    let scn = this.state.scenes[this.state.scene];
-    let jumping = this.state.jumping;
+    const scn = this.state.scenes[this.state.scene];
+    const jumping = this.state.jumping;
     // let lost = this.state.lost;
     // let won = this.state.won;
     return (
-      <div className="App container-fluid">
-        <StarField jumping={this.state.jumping} />
+      <div className="App container-fluid" style={{ background: "black" }}>
+        {jumping ? <JumpStarField /> : <IdleStarField />}
+
         <HUD
           fuel={this.state.fuel}
           food={this.state.food}
@@ -188,15 +225,16 @@ class App extends Component {
               ? "FAIL!"
               : scn.prompt
           }
+          chooseDifficulty={this.chooseDifficulty}
           onSelect={this.selectChoice}
           jumping={jumping}
-          clickJump={
-            jumping
-              ? ""
-              : this.game.lost || this.game.won
-              ? this.noGo
-              : this.handleClick
-          }
+          // clickJump={
+          //   jumping
+          //     ? ""
+          //     : this.game.lost || this.game.won
+          //     ? this.noGo
+          //     : this.handleClick
+          // }
           scene={this.state.scene}
           symbols={this.state.resourceSymbols}
           colors={this.state.resourceColors}
