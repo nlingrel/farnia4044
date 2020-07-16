@@ -48,7 +48,7 @@ const getRandomResource = function () {
 
 const getRandom = function (max = 5) {
   let random = Math.floor(Math.random() * (max + 1));
-  //    console.log(random)
+  //
   return random;
 };
 
@@ -101,7 +101,7 @@ const generateReward = function (
 ) {
   let reward = {};
   let max = 1;
-  //    if(double) console.log('doubled' + resource)
+  //    if(double)
   switch (resource) {
     case "food":
       max = 10;
@@ -232,23 +232,23 @@ class Game {
 
   decayFoodConsumptionModifiers() {
     for (let mod of this.foodConsumptionModifiers) {
-      // console.log(mod)
+      //
       mod.time -= 1;
     }
-    // console.log(this.foodConsumptionModifiers)
+    //
     let newMods = this.foodConsumptionModifiers.filter((item) => {
-      //    console.log(item)
+      //
       return item.time > 0;
     });
-    // console.log(newMods)
+    //
     this.foodConsumptionModifiers = newMods;
   }
 
   getTotalFoodConsumptionRate() {
     let baseRate = this.getBaseFoodConsumptionRate();
-    // console.log(baseRate)
+    //
     let modRate = this.getModifiedFoodConsumptionRate();
-    // console.log(modRate)
+    //
     return (baseRate + modRate) * this.farniansCount;
   }
 
@@ -263,7 +263,7 @@ class Game {
         fitnessArray.indexOf(this.fitnessCount) +
       consumptionScale.min;
 
-    // console.log(baseConsumptionRate)
+    //
 
     return baseConsumptionRate;
   }
@@ -278,7 +278,7 @@ class Game {
       for (let item of this.foodConsumptionModifiers) {
         totalMod += item.mod;
       }
-      //   console.log(totalMod)
+      //
     }
     return totalMod;
   }
@@ -306,7 +306,7 @@ class Game {
     return new Promise((resolve, reject) => {
       // todo
       let crewMember = this.generateFarnian(name, age);
-      //    console.log(this.crewKey);
+      //
       crewMember.key = this.crewKey;
       this.farniansCrew.push(crewMember);
       this.updateCrewCount();
@@ -334,10 +334,9 @@ class Game {
 
   loseSpecificCrew(name, key) {
     let newCrew = this.farniansCrew.filter(function (crew) {
-      console.log(crew.key !== key);
       return crew.key !== key;
     });
-    //   console.log(newCrew)
+    //
     this.farniansCrew = newCrew;
     this.fitnessCount = this.farniansCrew.length;
     return `Crew member ${name} is no longer with us`;
@@ -352,7 +351,6 @@ class Game {
       if (this.fitnessCount > 5) this.fitnessCount = 5;
       if (rewards[i].name === "fuel") this.fuelCount += rewards[i].amount;
     }
-    console.log("rewards gathered");
   }
 
   expedition(chosen = 0) {
@@ -391,7 +389,7 @@ class Game {
       return;
     }
     this.distanceLeft += this.choices[chosen].distance;
-    console.log("Choices in game controller", this.choices);
+
     if (this.distanceLeft <= 0) {
       this.distanceLeft = 0;
       this.winGame();
@@ -439,26 +437,26 @@ class Game {
 }
 
 // var game1 = new Game()
-// console.log(game1)
+//
 
 // let testAddSpecific = game1.addCrew('', 5)
-// console.log(testAddSpecific, game1)
+//
 
 // let testAddRandom = game1.addCrew()
-// console.log(testAddRandom, game1)
+//
 
 // let testLoseSpecific = game1.loseSpecificCrew('F1')
-// console.log(testLoseSpecific, game1)
+//
 
 // let testLost = game1.loseRandomCrew()
-// console.log(testLost, game1)
+//
 // game1.addFoodConsumptionModifier(5, 2)
-// console.log(game1)
-// console.log(game1.foodConsumptionRate)
+//
+//
 // game1.consumeFood()
-// console.log(game1)
+//
 // game1.decayFoodConsumptionModifiers()
-// console.log(game1)
+//
 
 // chooseRandomResource()
 // getRandom()

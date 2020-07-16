@@ -7,6 +7,7 @@ import Choices from "./components/Choices.jsx";
 import IdleStarField from "./components/IdleStarField.jsx";
 import JumpStarField from "./components/JumpStarfield";
 import TipBox from "./components/TipBox";
+import Credits from "./components/Credits";
 
 class App extends Component {
   constructor(props) {
@@ -91,7 +92,6 @@ class App extends Component {
 
   chooseDifficulty(event) {
     const choice = event.target.value;
-    console.log("Difficulty chosen = ", choice);
 
     this.game.initialize(choice);
     this.game.newSystems();
@@ -101,7 +101,7 @@ class App extends Component {
     event.preventDefault();
 
     const choice = event.currentTarget.value;
-    console.log("Choice as chosen", choice);
+
     const scn = this.state.scene;
     switch (scn) {
       case 1:
@@ -209,6 +209,7 @@ class App extends Component {
           message={this.state.message}
         />
         {jumping ? "" : <TipBox tips={tips} />}
+        <Credits />
       </div>
     );
   }

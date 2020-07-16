@@ -3,7 +3,7 @@ import React from "react";
 import HudIcon from "./HudIcon";
 
 function Choice(props) {
-  // console.log(props.choice)
+  //
 
   return (
     <div tabIndex={props.value} className="btn-group">

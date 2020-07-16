@@ -20,5 +20,3 @@ function StatusBar(props) {
 }
 
 export default StatusBar;
-
-// style={{ background: props.color }}

@@ -21,17 +21,6 @@ function JumpButton(props) {
           {text}
         </button>
       </div>
-      {/* <div className="range">
-        <label htmlFor="range">{text}</label>
-        <input
-          id="hyper-range"
-          type="range"
-          min="0"
-          max="2"
-          step=".2"
-          defaultValue="0"
-        />
-      </div> */}
     </>
   );
 }
