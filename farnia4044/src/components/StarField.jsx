@@ -1,18 +1,21 @@
-import React from "react";
-import JumpStar from "./JumpStar";
+import React, { Component } from "react";
+import StarFieldAnimation from "react-starfield-animation";
 
-function StarField(props) {
-  let starCount = 200;
-  let stars = [];
-
-  for (let i = 0; i < starCount; i++) {
-    stars.push(<JumpStar key={i} index={i} value={i} />);
+class StarField extends Component {
+  render() {
+    return (
+      <>
+        <StarFieldAnimation
+          style={{
+            position: "absolute",
+            width: "100%",
+            height: "100%",
+          }}
+          numParticles={300}
+        />
+      </>
+    );
   }
-  // for(let i =0; i < starCount; i++){
-  //     stars.push(<StaticStar key={i + 200} value={i + 200}/>)
-  // }
-
-  return <>{stars}</>;
 }
 
 export default StarField;

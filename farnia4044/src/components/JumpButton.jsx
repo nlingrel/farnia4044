@@ -11,17 +11,17 @@ function JumpButton(props) {
   const visClass = visible ? "showJumpButton" : "hideJumpButton";
   return (
     <>
-      <div className="row">
+      <div className="card-footer text-center">
         <button
           id="hyper"
           type="button"
-          className={`${visClass} btn btn-outline-info `}
+          className={`${visClass} btn btn-outline-info`}
           onClick={visible ? props.onClick : null}
         >
           {text}
         </button>
       </div>
-      <div className="range">
+      {/* <div className="range">
         <label htmlFor="range">{text}</label>
         <input
           id="hyper-range"
@@ -31,7 +31,7 @@ function JumpButton(props) {
           step=".2"
           defaultValue="0"
         />
-      </div>
+      </div> */}
     </>
   );
 }

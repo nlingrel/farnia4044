@@ -169,6 +169,7 @@ class App extends Component {
     // let won = this.state.won;
     return (
       <div className="App container-fluid">
+        <StarField jumping={this.state.jumping} />
         <HUD
           fuel={this.state.fuel}
           food={this.state.food}
@@ -201,10 +202,6 @@ class App extends Component {
           colors={this.state.resourceColors}
           message={this.state.message}
         />
-
-        <div className="scene">
-          <StarField jumping={this.state.jumping} />
-        </div>
       </div>
     );
   }
