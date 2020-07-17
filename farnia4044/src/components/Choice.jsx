@@ -60,12 +60,21 @@ function Choice(props) {
               value={props.value}
               style={
                 props.choice.distance <= 0
-                  ? { background: props.colors.farsecs, color: "white" }
-                  : { background: props.colors.farsecs, color: "red" }
+                  ? { color: "white" }
+                  : { color: "red" }
               }
             >
-              <div className="btn text-light ">{props.choice.distance}</div>
-              <HudIcon symbol={props.symbols.farsecs} value={props.value} />
+              <div
+                className="btn text-light "
+                style={{ background: props.colors.farsecs }}
+              >
+                {props.choice.distance}
+              </div>
+              <HudIcon
+                symbol={props.symbols.farsecs}
+                value={props.value}
+                color={props.colors.farsecs}
+              />
             </div>
           ) : (
             ""
