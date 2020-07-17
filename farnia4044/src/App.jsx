@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import HUD from "./components/Hud";
-// import JumpButton from "./components/JumpButton.jsx";
 import Game from "./gameLogic/F";
 
 import Choices from "./components/Choices.jsx";
