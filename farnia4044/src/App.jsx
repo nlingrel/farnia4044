@@ -85,13 +85,12 @@ class App extends Component {
     // this.soundtrack = new Audio("./magicforest.mp3");
   }
 
-  componentDidMount() {
-    document.getElementById("soundtrack").play();
-    document.getElementById("soundtrack").muted = false;
-  }
+  componentDidMount() {}
 
   chooseDifficulty(event) {
     const choice = event.target.value;
+    document.getElementById("soundtrack").play();
+    document.getElementById("soundtrack").muted = false;
 
     this.game.initialize(choice);
     this.game.newSystems();
