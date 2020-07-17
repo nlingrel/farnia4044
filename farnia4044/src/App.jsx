@@ -89,7 +89,7 @@ class App extends Component {
   componentDidMount() {}
 
   chooseDifficulty(event) {
-    const choice = event.target.value;
+    const choice = event.currentTarget.value;
     if (this.state.playSound === false) {
       this.setState({ playSound: true }, () => {
         document.getElementById("soundtrack").play();

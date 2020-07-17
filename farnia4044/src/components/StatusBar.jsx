@@ -4,16 +4,18 @@ import HudIcon from "./HudIcon";
 
 function StatusBar(props) {
   return (
-    <div className={`card border-0 bg-transparent`}>
-      <div className="d-flex justify-content-between">
-        <HudIcon symbol={props.symbol} color={props.color} />
-        <span className={` list-group-item bg-transparent font-weight-bold`}>
-          {props.name}
-        </span>
+    <div className="m-1">
+      <div className={`card border-0 bg-transparent`}>
+        <div className="btn-group">
+          <HudIcon symbol={props.symbol} color={props.color} />
+          <span className={` btn btn-outline-info font-weight-bold`}>
+            {props.name}
+          </span>
 
-        <span className={`list-group-item bg-transparent font-weight-bold`}>
-          {props.resource}{" "}
-        </span>
+          <span className={`btn btn-outline-info font-weight-bold`}>
+            {props.resource}{" "}
+          </span>
+        </div>
       </div>
     </div>
   );

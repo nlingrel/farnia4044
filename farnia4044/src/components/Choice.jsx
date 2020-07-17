@@ -1,6 +1,8 @@
 import React from "react";
 
 import HudIcon from "./HudIcon";
+import SystemBody from "./SystemBody";
+import System from "./System";
 
 function Choice(props) {
   //
@@ -16,9 +18,45 @@ function Choice(props) {
           value={props.value}
           title="choose"
         >
-          {props.choice.name}
+          <div className="card-header text-center p-0 m-0" value={props.value}>
+            {props.choice.name}
+            {/* {props.scene === 1 ? <System 
+                value={props.value}
+                symbol={props.symbols[props.choice.encounters[0].mainResource]}
+                choice={props.choice}
+              /> : <SystemBody />} */}
+          </div>
+
           {props.scene === 1 ? (
-            <li
+            <>
+              <li
+                value={props.value}
+                // style={{
+                //   background:
+                //     props.colors[props.choice.encounters[0].mainResource],
+                // }}
+              >
+                {/* <HudIcon
+                symbol={props.symbols[props.choice.encounters[0].mainResource]}
+                value={props.value}
+              /> */}
+
+                <System
+                  value={props.value}
+                  symbol={
+                    props.symbols[props.choice.encounters[0].mainResource]
+                  }
+                  choice={props.choice}
+                  color={props.colors[props.choice.encounters[0].mainResource]}
+                />
+              </li>
+            </>
+          ) : (
+            ""
+          )}
+          {props.scene === 1 ? (
+            <div
+              className="btn-group"
               value={props.value}
               style={
                 props.choice.distance <= 0
@@ -26,28 +64,13 @@ function Choice(props) {
                   : { background: props.colors.farsecs, color: "red" }
               }
             >
-              {props.choice.distance}
+              <div className="btn text-light ">{props.choice.distance}</div>
               <HudIcon symbol={props.symbols.farsecs} value={props.value} />
-            </li>
+            </div>
           ) : (
             ""
           )}
-          {props.scene === 1 ? (
-            <li
-              value={props.value}
-              style={{
-                background:
-                  props.colors[props.choice.encounters[0].mainResource],
-              }}
-            >
-              <HudIcon
-                symbol={props.symbols[props.choice.encounters[0].mainResource]}
-                value={props.value}
-              />
-            </li>
-          ) : (
-            ""
-          )}
+
           {props.scene === 2 ? (
             <li
               value={props.value}
