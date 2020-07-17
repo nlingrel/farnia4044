@@ -74,6 +74,7 @@ class App extends Component {
         ],
         3: [""],
       },
+      playSound: false,
     };
     this.game = new Game();
     this.selectChoice = this.selectChoice.bind(this);
@@ -89,8 +90,12 @@ class App extends Component {
 
   chooseDifficulty(event) {
     const choice = event.target.value;
-    document.getElementById("soundtrack").play();
-    document.getElementById("soundtrack").muted = false;
+    if (this.state.playSound === false) {
+      this.setState({ playSound: true }, () => {
+        document.getElementById("soundtrack").play();
+        document.getElementById("soundtrack").muted = false;
+      });
+    }
 
     this.game.initialize(choice);
     this.game.newSystems();
@@ -158,8 +163,8 @@ class App extends Component {
   }
 
   endJump(scene, timeout = 1750) {
-    let lost = this.state.lost;
-    let won = this.state.won;
+    let lost = this.game.lost;
+    let won = this.game.won;
     let scn = lost ? 0 : scene;
     setTimeout(() => {
       this.updateState(false, scn, lost, won);
@@ -208,7 +213,7 @@ class App extends Component {
         />
         {jumping ? (
           ""
-        ) : this.state.won || this.state.lost ? (
+        ) : this.game.won || this.game.lost ? (
           <Credits />
         ) : (
           <TipBox tips={tips} />
