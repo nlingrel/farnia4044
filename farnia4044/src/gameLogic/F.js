@@ -18,6 +18,8 @@ const deathCauses = {
     "died because they didn't get enough vitamins",
     "died from lack of food",
     "died of hunger",
+    "died",
+    "kicked the space bucket",
   ],
   fitness: [
     "offed themselves",
@@ -28,7 +30,8 @@ const deathCauses = {
     "died from extreme stress",
     "was killed by an arch-nemesis",
     "died horribly... don't ask",
-    "",
+    "died",
+    "kicked the space bucket",
   ],
   accident: [
     "fell into the food harvester",
@@ -38,6 +41,8 @@ const deathCauses = {
     "died while harvesting resources.",
     "died from internal bleeding",
     "was crushed to death by a docking module",
+    "died",
+    "kicked the space bucket",
   ],
 };
 
@@ -90,7 +95,6 @@ const generateEncounter = function (mainResource) {
   enc.rewards.push(rew);
   let bonusRew = successCheck(33);
   if (bonusRew) enc.rewards.push(generateReward());
-  //test
 
   return enc;
 };
@@ -354,6 +358,7 @@ class Game {
   }
 
   expedition(chosen = 0) {
+    console.log("Choices at start of expedition ", this.choices);
     let stats = {};
     let noFood = this.foodCount <= 0;
     let noFarnians = this.farniansCount <= 0;
@@ -367,10 +372,12 @@ class Game {
     this.choices = this.newSystems();
     let noFuel = this.fuelCount <= 0;
     if (noFarnians || noFuel) this.loseGame(noFarnians ? "Farnians" : "Fuel");
+    console.log("Choices at end of expedition ", this.choices);
     return stats;
   }
 
   jump(chosen = 0, cost = 1) {
+    console.log("Choices at start of jump", this.choices);
     let stats = {};
     let noFood = this.foodCount <= 0;
     let noFitness = this.fitnessCount <= -5;
@@ -400,6 +407,7 @@ class Game {
     if (additional > 0)
       this.choices = this.choices.concat(this.newEncounters(additional));
     this.message = "";
+    console.log("Choices at end of jump", this.choices);
     return stats;
   }
 

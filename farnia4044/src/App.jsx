@@ -82,11 +82,12 @@ class App extends Component {
 
     this.noGo = this.noGo.bind(this);
     this.chooseDifficulty = this.chooseDifficulty.bind(this);
-    this.soundtrack = new Audio("./magicforest.mp3");
+    // this.soundtrack = new Audio("./magicforest.mp3");
   }
 
   componentDidMount() {
-    this.soundtrack.play();
+    document.getElementById("soundtrack").play();
+    document.getElementById("soundtrack").muted = false;
   }
 
   chooseDifficulty(event) {
@@ -100,6 +101,7 @@ class App extends Component {
     event.preventDefault();
 
     const choice = event.currentTarget.value;
+    console.log("Choice in select choice ===> ", choice);
 
     const scn = this.state.scene;
     switch (scn) {
@@ -166,8 +168,6 @@ class App extends Component {
   }
 
   expedition(scene) {
-    const stars = document.querySelectorAll("div.backgroundStar");
-
     this.updateState(true, scene, false, false, () => {
       this.endJump(scene - 1);
     });
@@ -207,8 +207,14 @@ class App extends Component {
           colors={this.state.resourceColors}
           message={this.state.message}
         />
-        {jumping ? "" : <TipBox tips={tips} />}
-        <Credits />
+        {jumping ? (
+          ""
+        ) : this.state.won || this.state.lost ? (
+          <Credits />
+        ) : (
+          <TipBox tips={tips} />
+        )}
+        {scn === 3 || scn === 99 ? <Credits /> : ""}
       </div>
     );
   }
