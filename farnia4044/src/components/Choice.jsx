@@ -81,31 +81,54 @@ function Choice(props) {
           )}
 
           {props.scene === 2 ? (
-            <li
-              value={props.value}
-              className="text-light"
-              style={{ background: props.colors[props.choice.rewards[0].name] }}
-            >
-              {props.choice.rewards[0].amount}
-              <HudIcon
-                symbol={props.symbols[props.choice.rewards[0].name]}
-                value={props.value}
-              />
-            </li>
+            <>
+              <li value={props.value}>
+                {props.choice.type ? (
+                  <small className="text-secondary font-weight-bold text-text-center">
+                    {props.choice.type}
+                  </small>
+                ) : (
+                  ""
+                )}
+
+                <SystemBody value={props.value} choice={props.choice} />
+                <div className="btn-group">
+                  <div
+                    className="btn text-light "
+                    style={{
+                      background: props.colors[props.choice.rewards[0].name],
+                    }}
+                  >
+                    {props.choice.rewards[0].amount}
+                  </div>
+                  <HudIcon
+                    symbol={props.symbols[props.choice.rewards[0].name]}
+                    value={props.value}
+                    color={props.colors[props.choice.rewards[0].name]}
+                  />
+                </div>
+              </li>
+            </>
           ) : (
             ""
           )}
           {props.scene === 2 && props.choice.rewards.length === 2 ? (
-            <li
-              value={props.value}
-              style={{ background: props.colors[props.choice.rewards[1].name] }}
-              className="text-light"
-            >
-              {props.choice.rewards[1].amount}
-              <HudIcon
-                symbol={props.symbols[props.choice.rewards[1].name]}
-                value={props.value}
-              />
+            <li value={props.value} className="text-light">
+              <div className="btn-group">
+                <div
+                  className="btn text-light "
+                  style={{
+                    background: props.colors[props.choice.rewards[1].name],
+                  }}
+                >
+                  {props.choice.rewards[1].amount}
+                </div>
+                <HudIcon
+                  symbol={props.symbols[props.choice.rewards[1].name]}
+                  value={props.value}
+                  color={props.colors[props.choice.rewards[1].name]}
+                />
+              </div>
             </li>
           ) : (
             ""

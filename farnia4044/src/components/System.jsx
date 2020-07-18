@@ -42,6 +42,7 @@ export default function System(props) {
           ry={rxry.ry}
           transform={getRotationString(startRotAngle + startRotAngle * (i + 1))}
           value={props.value}
+          key={i}
           style={{
             fillOpacity: "0",
             strokeWidth: "0",
